@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/data/model/weather.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/bloc.dart';
+import '../data/model/weather.dart';
 
 class WeatherDetailPage extends StatelessWidget {
   final Weather masterWeather;
@@ -12,6 +14,9 @@ class WeatherDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<WeatherBloc>(context)
+      ..add(GetDetailedWeather(masterWeather.cityName));
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Weather Detail"),
@@ -19,8 +24,15 @@ class WeatherDetailPage extends StatelessWidget {
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 16),
         alignment: Alignment.center,
-        //TODO: Display the weather detail using Bloc
-        child: buildLoading(),
+        child: BlocBuilder<WeatherBloc, WeatherState>(
+          builder: (context, state) {
+            if (state is WeatherLoading) {
+              return buildLoading();
+            } else if (state is WeatherLoaded) {
+              return buildColumnWithData(context, state.weather);
+            }
+          },
+        ),
       ),
     );
   }
