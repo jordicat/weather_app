@@ -20,7 +20,7 @@ class _WeatherDetailPageState extends State<WeatherDetailPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-        BlocProvider.of<WeatherBloc>(context)
+    BlocProvider.of<WeatherBloc>(context)
       ..add(GetDetailedWeather(widget.masterWeather.cityName));
   }
 
