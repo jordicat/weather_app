@@ -1,4 +1,4 @@
-#Sun Feb 02 21:08:54 WET 2020
+#Sun Feb 02 22:44:59 WET 2020
 base.0=/home/jordi/Documents/projects/weather_app/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
